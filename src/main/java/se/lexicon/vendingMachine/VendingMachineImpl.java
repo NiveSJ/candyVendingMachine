@@ -14,13 +14,12 @@ public class VendingMachineImpl implements IVendingMachine {
 
     public VendingMachineImpl() {
         this.depositPool = 0;
-        this.sessionEndBal =0;
+        this.sessionEndBal = 0;
     }
 
 
-
     public void setProducts(Product[] products) {
-
+        this.products = products;
     }
 
     public int getDepositPool() {
@@ -28,7 +27,7 @@ public class VendingMachineImpl implements IVendingMachine {
     }
 
     public void setDepositPool(int depositPool) {
-        this.depositPool=depositPool;
+        this.depositPool = depositPool;
     }
 
     public void addToVendingMachine(Product product) {
@@ -40,13 +39,11 @@ public class VendingMachineImpl implements IVendingMachine {
 
 
     public void addCurrency(int amount) {
-        if (amount == 1 || amount == 2 || amount == 5 || amount == 10 || amount == 20 ||
-                amount == 50 || amount == 100 || amount == 200 || amount == 500 || amount == 1000)
+        if (amount == 1 || amount == 2 || amount == 5 || amount == 10 || amount == 20 || amount == 50 || amount == 100 || amount == 200 || amount == 500 || amount == 1000)
 
             this.depositPool += amount;
 
-        else
-            System.out.println("Please Deposit valid Currency");
+        else System.out.println("Please Deposit valid Currency");
 
 
     }
@@ -61,11 +58,9 @@ public class VendingMachineImpl implements IVendingMachine {
 
         for (Product prod : products) {
             if (depositPool >= prod.getPrice()) {
-                if (id == prod.getId())
-                    this.depositPool -= prod.getPrice();
+                if (id == prod.getId()) this.depositPool -= prod.getPrice();
                 return prod;
             }
-
         }
 
 
@@ -74,7 +69,7 @@ public class VendingMachineImpl implements IVendingMachine {
 
     public int endSession() {
         this.sessionEndBal = this.depositPool;
-        this.depositPool=0;
+        this.depositPool = 0;
         return sessionEndBal;
     }
 

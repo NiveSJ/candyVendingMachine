@@ -6,11 +6,6 @@ import se.lexicon.model.Product;
 import se.lexicon.model.Snickers;
 import se.lexicon.vendingMachine.VendingMachineImpl;
 
-import java.sql.SQLOutput;
-
-/**
- * Hello world!
- */
 public class App {
     public static void main(String[] args) {
          // Creating chocolate objects
