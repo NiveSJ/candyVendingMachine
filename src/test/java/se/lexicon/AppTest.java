@@ -1,38 +1,60 @@
 package se.lexicon;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
+import org.junit.Test;
+import org.junit.Assert;
+import se.lexicon.model.Bounty;
+import se.lexicon.model.Marabou;
+import se.lexicon.model.Snickers;
+import se.lexicon.vendingMachine.VendingMachineImpl;
+import se.lexicon.model.Product;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-    extends TestCase
+public class AppTest
 {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+
+    Marabou marabou = new Marabou(1000, 20, "Marabou Fruit and nut");
+    Bounty bounty = new Bounty(2000, 10, "Bounty coconut");
+    Snickers snickers = new Snickers(3000, 25, "Snickers chocolate");
+    Product[] prod;
+
+
+    @Test
+
+    public void candyVendingmachine(){
+
+
+        VendingMachineImpl vmi= new VendingMachineImpl();
+        // Add product
+        vmi.addToVendingMachine(bounty);
+        prod=vmi.getProducts();
+         // Check whether it is correctly added
+        for(Product availProd:prod)
+        Assert.assertEquals(bounty,availProd);
+           // Check currency add
+        vmi.addCurrency(200);
+        Assert.assertEquals(vmi.depositPool,200);
+
+         // Check Requested product returned correctly
+        Product prod = vmi.request(2000);
+        Assert.assertEquals(bounty,prod);
+
+        // Check balance
+
+        int balance = vmi.getBalance();
+        Assert.assertEquals(190,balance);
+
+        int availbalance= vmi.endSession();
+        Assert.assertEquals(190,availbalance);
+
+
+
+
+
+
+
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
 }
