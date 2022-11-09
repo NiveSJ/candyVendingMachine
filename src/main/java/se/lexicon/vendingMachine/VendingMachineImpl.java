@@ -12,9 +12,10 @@ public class VendingMachineImpl implements IVendingMachine {
     public int depositPool;
     public int sessionEndBal;
 
-    public VendingMachineImpl() {
+    public VendingMachineImpl(Product product) {
         this.depositPool = 0;
         this.sessionEndBal = 0;
+        addToVendingMachine(product);
     }
 
 

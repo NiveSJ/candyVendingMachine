@@ -8,24 +8,29 @@ import se.lexicon.vendingMachine.VendingMachineImpl;
 
 public class App {
     public static void main(String[] args) {
-         // Creating chocolate objects
+        // Creating chocolate objects
         Marabou marabou = new Marabou(1000, 20, "Marabou Fruit and nut");
         Bounty bounty = new Bounty(2000, 10, "Bounty coconut");
         Snickers snickers = new Snickers(3000, 25, "Snickers chocolate");
 
 
+        VendingMachineImpl vendingMachineImpl = new VendingMachineImpl(marabou);
+        VendingMachineImpl vendingMachineImpl1 = new VendingMachineImpl(bounty);
+        VendingMachineImpl vendingMachineImpl2 = new VendingMachineImpl(snickers);
 
-        VendingMachineImpl vendingMachineImpl = new VendingMachineImpl();
+
         // Adding to Vending machine
-        vendingMachineImpl.addToVendingMachine(marabou);
-        vendingMachineImpl.addToVendingMachine(bounty);
-        vendingMachineImpl.addToVendingMachine(snickers);
+        //vendingMachineImpl.addToVendingMachine(marabou);
+        //vendingMachineImpl.addToVendingMachine(bounty);
+        //vendingMachineImpl.addToVendingMachine(snickers);
+
 
         // check available products
-       Product[] availProduct= vendingMachineImpl.getProducts();
+        Product[] availProduct = vendingMachineImpl.getProducts();
         System.out.println("Available Products\n");
-       for(Product availProd:availProduct )
-           System.out.println(availProd);
+        for (Product availProd : availProduct)
+            System.out.println(availProd);
+
 
         //deposit money
         vendingMachineImpl.addCurrency(20);
@@ -42,10 +47,8 @@ public class App {
         int balance = vendingMachineImpl.getBalance();
         System.out.println("\nAvaliable balance is :" + balance);
         //End session
-        int availbalance= vendingMachineImpl.endSession();
-        System.out.println("\nSession ended and Available balance:"+ availbalance);
-
-
+        int availbalance = vendingMachineImpl.endSession();
+        System.out.println("\nSession ended and Available balance:" + availbalance);
 
 
     }
