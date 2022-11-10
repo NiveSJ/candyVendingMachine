@@ -4,6 +4,7 @@ import se.lexicon.model.Bounty;
 import se.lexicon.model.Marabou;
 import se.lexicon.model.Product;
 import se.lexicon.model.Snickers;
+import se.lexicon.vendingMachine.IVendingMachine;
 import se.lexicon.vendingMachine.VendingMachineImpl;
 
 public class App {
@@ -14,43 +15,44 @@ public class App {
         Snickers snickers = new Snickers(3000, 25, "Snickers chocolate");
 
 
-        VendingMachineImpl vendingMachineImpl = new VendingMachineImpl(marabou);
-        VendingMachineImpl vendingMachineImpl1 = new VendingMachineImpl(bounty);
-        VendingMachineImpl vendingMachineImpl2 = new VendingMachineImpl(snickers);
-
-
-        // Adding to Vending machine
-        //vendingMachineImpl.addToVendingMachine(marabou);
-        //vendingMachineImpl.addToVendingMachine(bounty);
-        //vendingMachineImpl.addToVendingMachine(snickers);
+        Product[] Prod = {marabou, bounty, snickers};
+        IVendingMachine vendingMachine = new VendingMachineImpl(Prod);
 
 
         // check available products
-        Product[] availProduct = vendingMachineImpl.getProducts();
+        Product[] availProduct = vendingMachine.getProducts();
         System.out.println("Available Products\n");
         for (Product availProd : availProduct)
             System.out.println(availProd);
 
 
-        //deposit money
-        vendingMachineImpl.addCurrency(20);
+        //deposit money  20 SEK
 
-        //Request product
-        Product prod = vendingMachineImpl.request(1000);
-        if (prod == null) {
-            System.out.println("Product not available");
-        } else {
-            System.out.println("\nRequested Product available");
-            System.out.println(vendingMachineImpl.getDescription(prod.getId()));
-        }
-        //check balance
-        int balance = vendingMachineImpl.getBalance();
+        vendingMachine.addCurrency(100);
+
+
+        int balance = vendingMachine.getBalance();
         System.out.println("\nAvaliable balance is :" + balance);
+        //Request product
+        Product prod = vendingMachine.request(1000);
+        if (prod == null)
+            System.out.println("Requested product not found or check balance");
+        else
+           // System.out.println("Product ");
+            System.out.println(prod.getProductName() + " " + prod.getPrice());
+
+        String to =vendingMachine.getDescription(1000);
+        System.out.println("New: "+to);
+
+
         //End session
-        int availbalance = vendingMachineImpl.endSession();
+        int availbalance = vendingMachine.endSession();
         System.out.println("\nSession ended and Available balance:" + availbalance);
 
 
+        //check balance
+        int balance1 = vendingMachine.getBalance();
+        System.out.println("\nAvaliable balance is :" + balance1);
     }
 
 }

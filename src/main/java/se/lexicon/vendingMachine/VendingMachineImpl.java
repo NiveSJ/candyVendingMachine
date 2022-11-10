@@ -7,15 +7,14 @@ import java.util.Arrays;
 
 public class VendingMachineImpl implements IVendingMachine {
 
-    private Product[] products = new Product[0];
+    private Product[] products;
 
     public int depositPool;
-    public int sessionEndBal;
 
-    public VendingMachineImpl(Product product) {
+    public VendingMachineImpl(Product[] products) {
+        this.products = products;
         this.depositPool = 0;
-        this.sessionEndBal = 0;
-        addToVendingMachine(product);
+
     }
 
 
@@ -31,17 +30,11 @@ public class VendingMachineImpl implements IVendingMachine {
         this.depositPool = depositPool;
     }
 
-    public void addToVendingMachine(Product product) {
-        Product[] add = Arrays.copyOf(products, products.length + 1);
-        add[add.length - 1] = product;
-        products = add;
-        this.products = products;
-    }
-
 
     public void addCurrency(int amount) {
-        if (amount == 1 || amount == 2 || amount == 5 || amount == 10 || amount == 20 || amount == 50 || amount == 100 || amount == 200 || amount == 500 || amount == 1000)
-
+      int valid_cur[]={1,2,5,10,20,50,100,200,500,1000};
+        int retur = Arrays.binarySearch(valid_cur,amount);
+        if(retur>=0)
             this.depositPool += amount;
 
         else System.out.println("Please Deposit valid Currency");
@@ -69,9 +62,9 @@ public class VendingMachineImpl implements IVendingMachine {
     }
 
     public int endSession() {
-        this.sessionEndBal = this.depositPool;
+        int tmp = this.depositPool;
         this.depositPool = 0;
-        return sessionEndBal;
+        return tmp;
     }
 
     public String getDescription(int id) {
@@ -90,6 +83,13 @@ public class VendingMachineImpl implements IVendingMachine {
 
     public Product[] getProducts() {
 
+       /* String[] str = new String[products.length];
+        int i=0;
+        for (Product prod : products) {
+
+            str[i]=prod.toString();
+            i++;
+        }*/
         return products;
     }
 }
