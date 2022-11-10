@@ -32,9 +32,9 @@ public class VendingMachineImpl implements IVendingMachine {
 
 
     public void addCurrency(int amount) {
-      int valid_cur[]={1,2,5,10,20,50,100,200,500,1000};
-        int retur = Arrays.binarySearch(valid_cur,amount);
-        if(retur>=0)
+        int valid_cur[] = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000};
+        int retur = Arrays.binarySearch(valid_cur, amount);
+        if (retur >= 0)
             this.depositPool += amount;
 
         else System.out.println("Please Deposit valid Currency");
@@ -51,9 +51,17 @@ public class VendingMachineImpl implements IVendingMachine {
 
 
         for (Product prod : products) {
-            if (depositPool >= prod.getPrice()) {
-                if (id == prod.getId()) this.depositPool -= prod.getPrice();
+            if (id == prod.getId()) {
+                if (depositPool >= prod.getPrice())
+                    this.depositPool -= (int) prod.getPrice();
+                else
+                    System.out.println("You do no have enough balance to buy");
                 return prod;
+            }
+            else
+            {
+                System.out.println("Requested product not found");
+                return null;
             }
         }
 

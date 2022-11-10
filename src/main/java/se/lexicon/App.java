@@ -28,21 +28,19 @@ public class App {
 
         //deposit money  20 SEK
 
-        vendingMachine.addCurrency(100);
+        vendingMachine.addCurrency(5);
 
 
         int balance = vendingMachine.getBalance();
         System.out.println("\nAvaliable balance is :" + balance);
         //Request product
         Product prod = vendingMachine.request(1000);
-        if (prod == null)
-            System.out.println("Requested product not found or check balance");
-        else
-           // System.out.println("Product ");
-            System.out.println(prod.getProductName() + " " + prod.getPrice());
+        if (prod != null)
 
-        String to =vendingMachine.getDescription(1000);
-        System.out.println("New: "+to);
+            System.out.println("Requested Product:"+prod.getProductName() + " " + prod.getPrice());
+
+        //String to =vendingMachine.getDescription(1000);
+        //System.out.println("New: "+to);
 
 
         //End session
