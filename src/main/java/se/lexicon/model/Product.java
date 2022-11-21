@@ -5,14 +5,22 @@ public abstract class Product {
     private int id;
     private double price;
     private String productName;
-
     private boolean available;
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
 
 
     public Product(int id, double price, String productName) {
         this.id = id;
         this.price = price;
         this.productName = productName;
+        setAvailable(true);
 
     }
 

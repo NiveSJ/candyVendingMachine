@@ -62,10 +62,13 @@ public class VendingMachineImpl implements IVendingMachine {
         for (Product prod : products) {
 
             if (VendingMachineImpl.count == 0) throw new RuntimeException("Vending machine is out of stock");
+
             if (id == prod.getId()) {
-                if (depositPool >= prod.getPrice() && VendingMachineImpl.count != 0) {
+                if(!prod.isAvailable()) throw new RuntimeException("Requested product not available");
+                if (depositPool >= prod.getPrice() && VendingMachineImpl.count != 0 ) {
                     this.depositPool -= (int) prod.getPrice();
                     VendingMachineImpl.count--;
+                    prod.setAvailable(false);
 
                     return prod;
                 }
