@@ -11,12 +11,23 @@ public class VendingMachineImpl implements IVendingMachine {
 
     public int depositPool;
 
+    private static int count;
+
+    private VendingMachineImpl() {
+    }
+
+    private static VendingMachineImpl vendingMachine;
+
+    public static VendingMachineImpl getInstance() {
+        if (vendingMachine == null) vendingMachine = new VendingMachineImpl();
+        return vendingMachine;
+
+    }
+
     public static int getCount() {
         return count;
     }
 
-
-    private static int count;
 
     public VendingMachineImpl(Product[] products) {
         setProducts(products);
@@ -25,7 +36,7 @@ public class VendingMachineImpl implements IVendingMachine {
     }
 
 
-    public void setProducts(Product[] products) {
+    public void setProducts(Product[] products) {  // new Implementation
         VendingMachineImpl.count = products.length;
 
         this.products = products;
@@ -64,8 +75,8 @@ public class VendingMachineImpl implements IVendingMachine {
             if (VendingMachineImpl.count == 0) throw new RuntimeException("Vending machine is out of stock");
 
             if (id == prod.getId()) {
-                if(!prod.isAvailable()) throw new RuntimeException("Requested product not available");
-                if (depositPool >= prod.getPrice() && VendingMachineImpl.count != 0 ) {
+                if (!prod.isAvailable()) throw new RuntimeException("Requested product not available");
+                if (depositPool >= prod.getPrice() && VendingMachineImpl.count != 0) {
                     this.depositPool -= (int) prod.getPrice();
                     VendingMachineImpl.count--;
                     prod.setAvailable(false);
@@ -109,6 +120,7 @@ public class VendingMachineImpl implements IVendingMachine {
             str[i]=prod.toString();
             i++;
         }*/
-        return products;
+        Product[] newprod = Arrays.copyOf(products, products.length);
+        return newprod;
     }
 }

@@ -38,10 +38,10 @@ public class App {
         //Request product
         int count = VendingMachineImpl.getCount();
         System.out.println(count);
-        Product prod = vendingMachine.request(2000);
-        if (prod != null)
+        //  Product prod = vendingMachine.request(2000);
+        //   if (prod != null)
 
-            System.out.println("Requested Product:" + prod.getProductName() + " " + prod.getPrice());
+        //    System.out.println("Requested Product:" + prod.getProductName() + " " + prod.getPrice());
 
         Product prod1 = vendingMachine.request(2000);
         if (prod1 != null)
@@ -58,10 +58,10 @@ public class App {
         int balance2 = vendingMachine.getBalance();
         System.out.println("\nAvaliable balance is :" + balance2);
 
-        Product prod3 = vendingMachine.request(3000);
-        if (prod3 != null)
+        //  Product prod3 = vendingMachine.request(3000);
+        // if (prod3 != null)
 
-            System.out.println("Requested Product:" + prod3.getProductName() + " " + prod2.getPrice());
+        //   System.out.println("Requested Product:" + prod3.getProductName() + " " + prod2.getPrice());
 
         //String to =vendingMachine.getDescription(1000);
         //System.out.println("New: "+to);
@@ -75,6 +75,11 @@ public class App {
         //check balance
         int balance5 = vendingMachine.getBalance();
         System.out.println("\nAvaliable balance is :" + balance5);
+
+
+        Product[] available = vendingMachine.getProducts();
+        for (Product prod : available)
+            System.out.println(prod);
     }
 
 }
