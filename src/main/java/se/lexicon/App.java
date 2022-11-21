@@ -48,12 +48,15 @@ public class App {
 
             System.out.println("Requested Product:" + prod1.getProductName() + " " + prod1.getPrice());
 
-
+        int balance1 = vendingMachine.getBalance();
+        System.out.println("\nAvaliable balance is :" + balance1);
         Product prod2 = vendingMachine.request(3000);
         if (prod2 != null)
 
             System.out.println("Requested Product:" + prod2.getProductName() + " " + prod2.getPrice());
 
+        int balance2 = vendingMachine.getBalance();
+        System.out.println("\nAvaliable balance is :" + balance2);
 
         Product prod3 = vendingMachine.request(3000);
         if (prod3 != null)
@@ -70,8 +73,8 @@ public class App {
 
 
         //check balance
-        int balance1 = vendingMachine.getBalance();
-        System.out.println("\nAvaliable balance is :" + balance1);
+        int balance5 = vendingMachine.getBalance();
+        System.out.println("\nAvaliable balance is :" + balance5);
     }
 
 }
