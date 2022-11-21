@@ -43,7 +43,7 @@ public class App {
 
             System.out.println("Requested Product:" + prod.getProductName() + " " + prod.getPrice());
 
-        Product prod1 = vendingMachine.request(1000);
+        Product prod1 = vendingMachine.request(2000);
         if (prod1 != null)
 
             System.out.println("Requested Product:" + prod1.getProductName() + " " + prod1.getPrice());
