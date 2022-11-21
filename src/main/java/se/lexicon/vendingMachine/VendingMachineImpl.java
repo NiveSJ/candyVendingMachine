@@ -11,14 +11,23 @@ public class VendingMachineImpl implements IVendingMachine {
 
     public int depositPool;
 
+    public static int getCount() {
+        return count;
+    }
+
+
+    private static int count;
+
     public VendingMachineImpl(Product[] products) {
-        this.products = products;
+        setProducts(products);
         this.depositPool = 0;
 
     }
 
 
     public void setProducts(Product[] products) {
+        VendingMachineImpl.count = products.length;
+
         this.products = products;
     }
 
@@ -51,21 +60,20 @@ public class VendingMachineImpl implements IVendingMachine {
 
 
         for (Product prod : products) {
+
+            if (VendingMachineImpl.count == 0) throw new RuntimeException("Vending machine is out of stock");
             if (id == prod.getId()) {
-                if (depositPool >= prod.getPrice())
+                if (depositPool >= prod.getPrice() && VendingMachineImpl.count != 0) {
                     this.depositPool -= (int) prod.getPrice();
-                else
-                    System.out.println("You do no have enough balance to buy");
-                return prod;
+                    VendingMachineImpl.count--;
+
+                    return prod;
+                }
+
             }
-            else
-            {
-                System.out.println("Requested product not found");
-                return null;
-            }
+
+
         }
-
-
         return null;
     }
 
